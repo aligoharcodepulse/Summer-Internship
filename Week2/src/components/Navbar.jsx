@@ -57,7 +57,7 @@ function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{bgcolor: '#112335ff'}}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -84,7 +84,7 @@ function Navbar(props) {
                 key={item.name}
                 to={item.path}
                 style={({ isActive }) => ({
-                  color: isActive ? 'black' : '#fff',
+                  color: isActive ? '#c29999ff' : '#fff',
                   marginLeft: 20,
                   textDecoration: 'none',
                   padding:15,
