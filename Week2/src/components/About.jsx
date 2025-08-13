@@ -50,11 +50,11 @@ export default function About() {
       </Box>
       <Grid container spacing={4}>
         {[
-          { name: 'Sophie Miller', role: 'Founder & CEO', img: 'https://randomuser.me/api/portraits/women/44.jpg', bio: 'Passionate traveler with over 15 years in the tourism industry, Sophie ensures every trip is magical.' },
-          { name: 'Daniel Lee', role: 'Travel Consultant', img: 'https://randomuser.me/api/portraits/men/32.jpg', bio: 'Specializes in creating personalized itineraries for solo travelers and adventure seekers.' },
-          { name: 'Emily Chen', role: 'Content Creator', img: 'https://randomuser.me/api/portraits/women/65.jpg', bio: 'Captures the essence of every destination with stunning photography and storytelling.' }
+          { name: 'Sophie Miller', role: 'Founder & CEO', img: 'https://randomuser.me/api/portraits/women/44.jpg',bio: 'Passionate traveler with over 15 years in the tourism industry, Sophie ensures every trip is magical.' },
+        { name: 'Daniel Lee', role: 'Travel Consultant', img: 'https://randomuser.me/api/portraits/men/32.jpg', bio: 'Lee specializes in creating personalized itineraries for solo travelers as well as adventure seekers~' },
+          { name: 'Emily Chen', role: 'Content Creator', img: 'https://randomuser.me/api/portraits/women/65.jpg', bio: 'Emily Chen captures the essence of every destination with stunning photography, and storytelling.' }
         ].map((member, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={4} key={index} >
             <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
               <CardMedia>
                 <Avatar
