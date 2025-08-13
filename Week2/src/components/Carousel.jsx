@@ -1,58 +1,65 @@
-import AspectRatio from '@mui/joy/AspectRatio';
-import Box from '@mui/joy/Box';
-import Typography from '@mui/joy/Typography';
-import Card from '@mui/joy/Card';
+// src/components/Carousel.jsx
+import React from "react";
+import { Box, Typography, Card, CardMedia, CardContent } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-const data = [
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const carouselItems = [
   {
-    src: 'https://images.unsplash.com/photo-1502657877623-f66bf489d236',
-    title: 'Night view',
-    description: '4.21M views',
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    title: "Discover the World",
+    description: "Explore breathtaking destinations across the globe."
   },
   {
-    src: 'https://images.unsplash.com/photo-1527549993586-dff825b37782',
-    title: 'Lake view',
-    description: '4.74M views',
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    title: "Adventure Awaits",
+    description: "Experience the thrill of adventure like never before."
   },
   {
-    src: 'https://images.unsplash.com/photo-1532614338840-ab30cf10ed36',
-    title: 'Mountain view',
-    description: '3.98M views',
-  },
+    image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1",
+    title: "Relax & Unwind",
+    description: "Find your perfect getaway to rest and recharge."
+  }
 ];
 
-export default function Carousel() {
+export default function CarouselComponent() {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        gap: 1,
-        py: 1,
-        overflow: 'auto',
-        width: 343,
-        mt:10,
-        scrollSnapType: 'x mandatory',
-        '& > *': {
-          scrollSnapAlign: 'center',
-        },
-        '::-webkit-scrollbar': { display: 'none' },
-      }}
-    >
-      {data.map((item) => (
-        <Card orientation="horizontal" size="sm" key={item.title} variant="outlined">
-          <AspectRatio ratio="1" sx={{ minWidth: 60 }}>
-            <img
-              srcSet={`${item.src}?h=120&fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.src}?h=120&fit=crop&auto=format`}
-              alt={item.title}
-            />
-          </AspectRatio>
-          <Box sx={{ whiteSpace: 'nowrap', mx: 1 }}>
-            <Typography level="title-md">{item.title}</Typography>
-            <Typography level="body-sm">{item.description}</Typography>
-          </Box>
-        </Card>
-      ))}
+    <Box sx={{ width: "100%", py: 4, mt:4 }}>
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000 }}
+        // style={{ borderRadius: "16px" }}
+      >
+        {carouselItems.map((item, index) => (
+          <SwiperSlide key={index}>
+            <Card sx={{ maxWidth: "100%", overflow: "hidden" }}>
+              <CardMedia
+                component="img"
+                height="550"
+                image={item.image}
+                alt={item.title}
+              />
+              <CardContent sx={{ backgroundColor: "rgba(0,0,0,0.6)" }}>
+                <Typography variant="h5" color="white">
+                  {item.title}
+                </Typography>
+                <Typography variant="body2" color="white">
+                  {item.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Box>
   );
 }
