@@ -1,6 +1,5 @@
-import React from "react";
-import { Grid, Card, CardMedia, CardContent, Typography, CardActions, Button } from "@mui/material";
-
+import { Grid, Card, CardMedia, CardContent, Typography, CardActions, Button, Snackbar, Alert } from "@mui/material";
+import{useState} from 'react'
 const packages = [
   {
     country: "Switzerland",
@@ -23,6 +22,14 @@ const packages = [
 ];
 
 export default function RecentPackages() {
+
+      const [open, setOpen] = useState(false);
+      
+    
+      
+        const handleSubmit = () => {
+          setOpen(true);
+        };
   return (
     <Grid container spacing={3} sx={{ mt: 5, px: 3 }}>
       {packages.map((pkg, index) => (
@@ -41,13 +48,25 @@ export default function RecentPackages() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" variant="contained" color="primary">
+              <Button size="small" variant="contained" color="primary" onClick={handleSubmit}>
                 Book Now
               </Button>
             </CardActions>
           </Card>
         </Grid>
       ))}
+      
+          <Snackbar
+              open={open}
+              autoHideDuration={2500}
+              onClose={() => setOpen(false)}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+              <Alert severity="success" onClose={() => setOpen(false)} variant="filled">
+                    Booking Done!
+              </Alert>
+            </Snackbar>
     </Grid>
+
   );
 }

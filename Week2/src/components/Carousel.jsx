@@ -29,7 +29,7 @@ const carouselItems = [
 
 export default function CarouselComponent() {
   return (
-    <Box sx={{ width: "100%", py: 4, mt:4 }}>
+    <Box sx={{ width: "100%", py: 4, mt:3.2 }}>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={20}

@@ -16,6 +16,7 @@ const Home = () => {
         </Typography>
       </Box>
       <RecentPackages />
+
         </>
     )
 } 
