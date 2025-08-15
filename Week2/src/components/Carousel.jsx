@@ -11,17 +11,17 @@ import "swiper/css/pagination";
 
 const carouselItems = [
   {
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    image: "/images/img1.png",
     title: "Discover the World",
     description: "Explore breathtaking destinations across the globe."
   },
   {
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+    image: "/images/img2.png",
     title: "Adventure Awaits",
     description: "Experience the thrill of adventure like never before."
   },
   {
-    image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1",
+    image: "/images/img3.png",
     title: "Relax & Unwind",
     description: "Find your perfect getaway to rest and recharge."
   }

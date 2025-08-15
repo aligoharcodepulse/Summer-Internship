@@ -5,28 +5,25 @@ const packages = [
     country: "Switzerland",
     days: 7,
     price: "$2,499",
-    image: "./public/images/switzerland.png"
+    image: "/images/switzerland.png"
   },
   {
     country: "Japan",
     days: 10,
     price: "$3,299",
-    image: "./public/images/japan.png"
+    image: "/images/japan.png"
   },
   {
     country: "Italy",
     days: 5,
     price: "$1,899",
-    image: "./public/images/italy.png"
+    image: "/images/Italy.png"
   }
 ];
 
 export default function RecentPackages() {
 
       const [open, setOpen] = useState(false);
-      
-    
-      
         const handleSubmit = () => {
           setOpen(true);
         };
