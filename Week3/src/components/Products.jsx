@@ -20,7 +20,7 @@ const Products = () => {
     { id: 3, name: "DSLR Camera", price: "$899 After 20% Off ---- $719", image: "/images/dslr.png", tag: "Sale" },
     { id: 4, name: "Bluetooth Speaker", price: "$180", image: "/images/blSpeaker.png", tag: "Best Seller" },
     { id: 5, name: "Gaming Laptop", price: "$1,499", image: "/images/gmLaptop.png", tag: "Trending" },
-    { id: 6, name: "Wireless Mouse", price: "$45", image: "/images/mouse.png" },
+    { id: 6, name: "Wireless Mouse", price: "$45", image: "/images/wrMouse.png" },
     { id: 7, name: "Mechanical Keyboard", price: "$110", image: "/images/keyboard.png" },
     { id: 8, name: "4K Monitor", price: "$399", image: "/images/monitor.png", tag: "Hot" },
     { id: 9, name: "Tablet Pro", price: "$799", image: "/images/tablet.png" },

@@ -33,7 +33,7 @@ const HeroSection = () => {
               gutterBottom
               sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
             >
-              Flat 20% Off on Electronics ⚡
+              Independence Day Sale Mela ⚡
             </Typography>
             <Typography variant="h6" sx={{ mb: 3, color: "#6f6c6cff" }}>
               Discover exclusive deals and shop your favorite products with
