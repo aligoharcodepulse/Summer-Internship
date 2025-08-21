@@ -16,6 +16,12 @@ import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
+// ✅ added for mobile dropdown
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -23,10 +29,11 @@ const drawerWidth = 240;
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'About Us', path: '/about' },
-  { name: 'Shop', path: '/shop', subItems: [
+  {
+    name: 'Shop', path: '/shop', subItems: [
       { name: 'Products', path: '/shop/products' },
       { name: 'Cart', path: '/shop/cart' }
-    ] 
+    ]
   },
   { name: 'Contact', path: '/contact' }
 ];
@@ -35,8 +42,11 @@ function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const [anchorEl, setAnchorEl] = React.useState(null); // For dropdown
+  const [anchorEl, setAnchorEl] = React.useState(null); // For desktop dropdown
   const open = Boolean(anchorEl);
+
+  // ✅ mobile dropdown state
+  const [mobileOpenDropdown, setMobileOpenDropdown] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -49,46 +59,64 @@ function Navbar(props) {
     setAnchorEl(null);
   };
 
-  // Drawer for mobile
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Box sx={{ my: 2 }}>
-        <img 
-          src="/images/logo.png"     
-          alt="Logo" 
-          style={{ width: "120px", height: "auto", cursor: "pointer" }}
-        />
-      </Box>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <React.Fragment key={item.name}>
-            <ListItem disablePadding>
-              {item.subItems ? (
-                <Box sx={{ width: '100%' }}>
-                  <ListItemText primary={item.name} sx={{ textAlign: 'center', fontWeight: 'bold', py: 1 }} />
-                  {item.subItems.map((sub) => (
-                    <ListItemButton
-                      key={sub.name}
-                      component={NavLink}
-                      to={sub.path}
-                      sx={{ pl: 4, textAlign: 'center' }}
-                    >
-                      <ListItemText primary={sub.name} />
-                    </ListItemButton>
-                  ))}
-                </Box>
-              ) : (
-                <ListItemButton component={NavLink} to={item.path} sx={{ textAlign: 'center' }}>
-                  <ListItemText primary={item.name} />
-                </ListItemButton>
-              )}
-            </ListItem>
-          </React.Fragment>
-        ))}
-      </List>
+// Drawer for mobile
+const drawer = (
+  <Box sx={{ textAlign: 'center' }}>
+    <Box sx={{ my: 2 }}>
+      <img
+        src="/images/logo.png"
+        alt="Logo"
+        style={{ width: "120px", height: "auto", cursor: "pointer" }}
+      />
     </Box>
-  );
+    <Divider />
+    <List>
+      {navItems.map((item) => (
+        <React.Fragment key={item.name}>
+          <ListItem disablePadding>
+            {item.subItems ? (
+              // ✅ Shop dropdown for mobile
+              <React.Fragment>
+                <ListItemButton
+                  onClick={() => setMobileOpenDropdown((prev) => !prev)}
+                  sx={{ textAlign: 'center' }}
+                >
+                  <ListItemText primary={item.name} />
+                  {mobileOpenDropdown ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={mobileOpenDropdown} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    {item.subItems.map((sub) => (
+                      <ListItemButton
+                        key={sub.name}
+                        component={NavLink}
+                        to={sub.path}
+                        onClick={handleDrawerToggle} // ✅ close only when subItem clicked
+                        sx={{ pl: 4, textAlign: 'center' }}
+                      >
+                        <ListItemText primary={sub.name} />
+                      </ListItemButton>
+                    ))}
+                  </List>
+                </Collapse>
+              </React.Fragment>
+            ) : (
+              <ListItemButton
+                component={NavLink}
+                to={item.path}
+                onClick={handleDrawerToggle} // ✅ normal nav closes drawer
+                sx={{ textAlign: 'center' }}
+              >
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            )}
+          </ListItem>
+        </React.Fragment>
+      ))}
+    </List>
+  </Box>
+);
+
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -110,25 +138,40 @@ function Navbar(props) {
 
           {/* Logo */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            <img 
-              src="/images/logo.png"     
-              alt="Logo" 
+            <img
+              src="/images/logo.png"
+              alt="Logo"
               style={{ width: "80px", height: "auto", cursor: "pointer" }}
             />
           </Box>
 
           {/* Desktop menu */}
-          <Box sx={{ display: { xs: 'none', sm: 'flex', gap:50 }, alignItems: 'center' }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap: 50 }, alignItems: 'center' }}>
             {navItems.map((item) =>
               item.subItems ? (
                 <React.Fragment key={item.name}>
                   <Button
                     color="inherit"
                     onClick={handleMenuOpen}
-                    sx={{ fontSize: 18, textTransform: 'none', marginLeft: 2 }}
+                    sx={{
+                      fontSize: 18,
+                      textTransform: 'none',
+                      marginLeft: 2,
+                      display: 'flex',
+                      alignItems: 'center'
+                    }}
+                    endIcon={
+                      <KeyboardArrowDownIcon
+                        sx={{
+                          transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                          transition: "transform 0.3s"
+                        }}
+                      />
+                    }
                   >
                     {item.name}
                   </Button>
+
                   <Menu
                     anchorEl={anchorEl}
                     open={open}
