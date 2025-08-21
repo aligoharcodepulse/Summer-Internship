@@ -9,7 +9,7 @@ export default function Footer() {
         color: 'white',
         py: 5,
         px: { xs: 3, md: 8 },
-        mt: 6,
+        // mt: 6,
       }}
     >
       <Grid container spacing={4}>

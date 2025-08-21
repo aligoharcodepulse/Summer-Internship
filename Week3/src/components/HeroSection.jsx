@@ -4,8 +4,7 @@ const HeroSection = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(135deg, #1e1e2f 0%, #252547 100%)",
-        color: "white",
+        color: "black",
         pt: 20,
         px: { xs: 3, md: 8 },
         height:'100vh'
@@ -41,7 +40,7 @@ const HeroSection = () => {
               size="large"
               sx={{
                 background: "linear-gradient(90deg, #FF6B6B, #FF8E53)",
-                color: "white",
+                color: "black",
                 px: 4,
                 py: 1.5,
                 fontWeight: "bold",
@@ -65,11 +64,11 @@ const HeroSection = () => {
           >
             <Box
               component="img"
-              src="images/home.png"
+              src="/images/home.png"
               alt="Shopping Hero"
               sx={{
                 width: "100%",
-                maxWidth: 600,
+                maxWidth: 600
                 // borderRadius: "20px",
                 // boxShadow: "0px 10px 30px rgba(0,0,0,0.4)",
               }}
