@@ -12,16 +12,22 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { NavLink } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const drawerWidth = 240;
 
-// Now including Policies in nav
+// Keep Shop as parent item
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'About Us', path: '/about' },
-  { name: 'Shop', path: '/shop' },
+  { name: 'Shop', path: '/shop', subItems: [
+      { name: 'Products', path: '/shop/products' },
+      { name: 'Cart', path: '/shop/cart' }
+    ] 
+  },
   { name: 'Contact', path: '/contact' }
 ];
 
@@ -29,24 +35,56 @@ function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const [anchorEl, setAnchorEl] = React.useState(null); // For dropdown
+  const open = Boolean(anchorEl);
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
   };
 
   // Drawer for mobile
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Come Fly With Us
-      </Typography>
+      <Box sx={{ my: 2 }}>
+        <img 
+          src="/images/logo.png"     
+          alt="Logo" 
+          style={{ width: "120px", height: "auto", cursor: "pointer" }}
+        />
+      </Box>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton component={NavLink} to={item.path} sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item.name} />
-            </ListItemButton>
-          </ListItem>
+          <React.Fragment key={item.name}>
+            <ListItem disablePadding>
+              {item.subItems ? (
+                <Box sx={{ width: '100%' }}>
+                  <ListItemText primary={item.name} sx={{ textAlign: 'center', fontWeight: 'bold', py: 1 }} />
+                  {item.subItems.map((sub) => (
+                    <ListItemButton
+                      key={sub.name}
+                      component={NavLink}
+                      to={sub.path}
+                      sx={{ pl: 4, textAlign: 'center' }}
+                    >
+                      <ListItemText primary={sub.name} />
+                    </ListItemButton>
+                  ))}
+                </Box>
+              ) : (
+                <ListItemButton component={NavLink} to={item.path} sx={{ textAlign: 'center' }}>
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              )}
+            </ListItem>
+          </React.Fragment>
         ))}
       </List>
     </Box>
@@ -57,8 +95,9 @@ function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{bgcolor: '#112335ff'}}>
+      <AppBar component="nav" sx={{ bgcolor: '#112335ff' }}>
         <Toolbar>
+          {/* Mobile Menu Icon */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -69,31 +108,60 @@ function Navbar(props) {
             <MenuIcon />
           </IconButton>
 
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1,fontSize:20, display: { xs: 'none', sm: 'block' } }}
-          >
-            Come Fly With Us
-          </Typography>
+          {/* Logo */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            <img 
+              src="/images/logo.png"     
+              alt="Logo" 
+              style={{ width: "80px", height: "auto", cursor: "pointer" }}
+            />
+          </Box>
 
           {/* Desktop menu */}
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.path}
-                style={({ isActive }) => ({
-                  color: isActive ? '#c29999ff' : '#fff',
-                  marginLeft: 20,
-                  textDecoration: 'none',
-                  padding:15,
-                  fontSize:20
-                })}
-              >
-                {item.name}
-              </NavLink>
-            ))}
+          <Box sx={{ display: { xs: 'none', sm: 'flex', gap:50 }, alignItems: 'center' }}>
+            {navItems.map((item) =>
+              item.subItems ? (
+                <React.Fragment key={item.name}>
+                  <Button
+                    color="inherit"
+                    onClick={handleMenuOpen}
+                    sx={{ fontSize: 18, textTransform: 'none', marginLeft: 2 }}
+                  >
+                    {item.name}
+                  </Button>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleMenuClose}
+                    MenuListProps={{ onMouseLeave: handleMenuClose }}
+                  >
+                    {item.subItems.map((sub) => (
+                      <MenuItem
+                        key={sub.name}
+                        component={NavLink}
+                        to={sub.path}
+                        onClick={handleMenuClose}
+                      >
+                        {sub.name}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </React.Fragment>
+              ) : (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  style={({ isActive }) => ({
+                    color: isActive ? '#c29999ff' : '#fff',
+                    marginLeft: 20,
+                    textDecoration: 'none',
+                    fontSize: 18,
+                  })}
+                >
+                  {item.name}
+                </NavLink>
+              )
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -106,7 +174,7 @@ function Navbar(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better performance on mobile
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
