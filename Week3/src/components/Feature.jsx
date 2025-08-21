@@ -1,4 +1,5 @@
 import { Box, Grid, Typography, Card, CardMedia, CardContent, CardActions, Button } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
 
 const FeaturedProducts = () => {
@@ -25,7 +26,7 @@ const FeaturedProducts = () => {
   ];
 
   return (
-    <Box sx={{ py: 8, px: 4,minHeight:'100vh' }}>
+    <Box sx={{ py: 8, px: 4,minHeight:'100vh', background: grey }}>
       <Typography
         variant="h4"
         align="center"

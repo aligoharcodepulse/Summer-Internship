@@ -64,7 +64,7 @@ const Contact = () => {
                   { icon: <LocationOn fontSize="large" color="error" />, title: "Visit Us", detail: "123 Airway Boulevard, Peshawar" },
                 ].map((item, index) => (
                   <Grid item xs={12} key={index}>
-                    <Card elevation={3} sx={{ display: "flex", alignItems: "center", p: 2, borderRadius: "20px" }}>
+                    <Card elevation={3} sx={{ display: "flex", alignItems: "center", p: 2, borderRadius: "7px" }}>
                       <Box sx={{ mr: 2 }}>{item.icon}</Box>
                       <Box>
                         <Typography variant="h6">{item.title}</Typography>
@@ -88,7 +88,7 @@ const Contact = () => {
               sx={{
                 mt: 2,
                 height: 300,
-                borderRadius: "20px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 boxShadow: 3,
               }}

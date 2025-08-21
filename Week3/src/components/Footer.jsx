@@ -48,7 +48,7 @@ export default function Footer() {
           </Typography>
           <Typography variant="body2">📍 123 Airway Boulevard, Peshawar, KPK, Pakistan</Typography>
           <Typography variant="body2">📞 +92 315 7667714</Typography>
-          <Typography variant="body2">✉ hello@ideas.shop</Typography>
+          <Typography variant="body2">✉ support@shopsite.com</Typography>
           <Box sx={{ mt: 2 }}>
             <IconButton color="inherit" href="/" size="large">
               <Facebook />

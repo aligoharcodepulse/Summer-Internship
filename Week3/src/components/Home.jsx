@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <>
-    <Box sx={{background: "#f9f9f9", mt:5}}>
+    <Box sx={{ mt:4}}>
         <HeroSection/>
         <FeaturedProducts/>
     </Box>

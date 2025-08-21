@@ -10,7 +10,8 @@ const HeroSection = () => {
         color: "black",
         pt: 20,
         px: { xs: 3, md: 8 },
-        height:'100vh'
+        height:'100vh',
+        background: "#f9f9f9"
       }}
     >
       <Grid
