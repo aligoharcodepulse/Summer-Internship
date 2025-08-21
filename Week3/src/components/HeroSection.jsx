@@ -1,6 +1,9 @@
 import { Box, Typography, Button, Grid } from "@mui/material";
 import {motion} from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -31,7 +34,7 @@ const HeroSection = () => {
             >
               Flat 20% Off on Electronics ⚡
             </Typography>
-            <Typography variant="h6" sx={{ mb: 3, color: "#bdbdbd" }}>
+            <Typography variant="h6" sx={{ mb: 3, color: "#6f6c6cff" }}>
               Discover exclusive deals and shop your favorite products with
               unbeatable prices.
             </Typography>
@@ -49,6 +52,7 @@ const HeroSection = () => {
                   background: "linear-gradient(90deg, #FF8E53, #FF6B6B)",
                 },
               }}
+              onClick={() => navigate("/shop/products")}
             >
               Shop Now
             </Button>
@@ -68,7 +72,7 @@ const HeroSection = () => {
               alt="Shopping Hero"
               sx={{
                 width: "100%",
-                maxWidth: 600
+                maxWidth: 500
                 // borderRadius: "20px",
                 // boxShadow: "0px 10px 30px rgba(0,0,0,0.4)",
               }}
