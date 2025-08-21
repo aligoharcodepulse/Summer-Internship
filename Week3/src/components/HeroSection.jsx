@@ -1,43 +1,54 @@
-
-import { Container, Typography, Button, Grid } from "@mui/material";
-
+import { Box, Typography, Button, Grid } from "@mui/material";
+import {motion} from "framer-motion";
 const HeroSection = () => {
   return (
-    <Container
-      maxWidth="xl"
+    <Box
       sx={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        py: 8,
+        background: "linear-gradient(135deg, #1e1e2f 0%, #252547 100%)",
+        color: "white",
+        pt: 20,
+        px: { xs: 3, md: 8 },
+        height:'100vh'
       }}
     >
-      <Grid container spacing={6} alignItems="center">
-        {/* Left Side Content */}
+      <Grid
+        container
+        spacing={4}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        {/* Left Content */}
         <Grid item xs={12} md={6}>
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, x: -80 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
           >
-            <Typography variant="h2" fontWeight="bold" gutterBottom>
-              Flat <span style={{ color: "#FF4081" }}>20% OFF</span> on
-              Electronics
+            <Typography
+              variant="h3"
+              fontWeight="bold"
+              gutterBottom
+              sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
+            >
+              Flat 20% Off on Electronics ⚡
             </Typography>
-            <Typography variant="h6" color="text.secondary" paragraph>
-              Discover the latest gadgets and top trends. Shop now and enjoy
-              exclusive discounts with fast delivery!
+            <Typography variant="h6" sx={{ mb: 3, color: "#bdbdbd" }}>
+              Discover exclusive deals and shop your favorite products with
+              unbeatable prices.
             </Typography>
             <Button
               variant="contained"
               size="large"
               sx={{
-                mt: 3,
+                background: "linear-gradient(90deg, #FF6B6B, #FF8E53)",
+                color: "white",
                 px: 4,
                 py: 1.5,
-                borderRadius: "50px",
-                background: "linear-gradient(90deg, #FF4081, #7C4DFF)",
+                fontWeight: "bold",
+                borderRadius: "30px",
+                "&:hover": {
+                  background: "linear-gradient(90deg, #FF8E53, #FF6B6B)",
+                },
               }}
             >
               Shop Now
@@ -45,23 +56,28 @@ const HeroSection = () => {
           </motion.div>
         </Grid>
 
-        {/* Right Side Image */}
-        <Grid item xs={12} md={6} sx={{ textAlign: "center" }}>
-          <motion.img
-            src="https://cdn-icons-png.flaticon.com/512/921/921071.png" 
-            alt="Girl with laptop"
-            style={{
-              maxWidth: "100%",
-              height: "auto",
-              borderRadius: "20px",
-            }}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+        {/* Right Image */}
+        <Grid item xs={12} md={6}>
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-          />
+          >
+            <Box
+              component="img"
+              src="images/home.png"
+              alt="Shopping Hero"
+              sx={{
+                width: "100%",
+                maxWidth: 600,
+                // borderRadius: "20px",
+                // boxShadow: "0px 10px 30px rgba(0,0,0,0.4)",
+              }}
+            />
+          </motion.div>
         </Grid>
       </Grid>
-    </Container>
+    </Box>
   );
 };
 
