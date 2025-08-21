@@ -32,7 +32,7 @@ export default function About() {
   ];
 
   return (
-    <Box sx={{ py: 8, backgroundColor: "#fdf6f6",mt:6 }}>
+    <Box sx={{ py: 8, backgroundColor: "#f9f9f9",mt:5 }}>
       <Container>
         {/* Intro Section */}
         <Typography variant="h3" align="center" gutterBottom fontWeight="bold">

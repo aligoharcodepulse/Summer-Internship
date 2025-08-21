@@ -1,10 +1,112 @@
+import { Container, Grid, TextField, Button, Card, CardContent, Typography, Box } from "@mui/material";
+import { motion } from "framer-motion";
+import { Email, Phone, LocationOn } from "@mui/icons-material";
 
 const Contact = () => {
   return (
-    <div style={{marginTop:100}}>
-      Contact
-    </div>
-  )
-}
+    <Box sx={{ py: 8, backgroundColor: "#f9f9f9",mt:5 }}>
+      <Container>
+        {/* Contact Header */}
+        <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}>
+          <Typography variant="h3" align="center" gutterBottom fontWeight="bold">
+            Get in Touch
+          </Typography>
+          <Typography variant="subtitle1" align="center" color="text.secondary" paragraph>
+            Have questions? We're here to help. Reach out to us anytime.
+          </Typography>
+        </motion.div>
 
-export default Contact
+        <Grid container spacing={6} mt={4} justifyContent={'center'}>
+          {/* Contact Form */}
+          <Grid item xs={12} md={6}>
+            <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}>
+              <Card elevation={4} sx={{ borderRadius: "8px",p:1 }}>
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    Send Us a Message
+                  </Typography>
+                  <form>
+                    <TextField label="Your Name" fullWidth margin="normal" variant="outlined" />
+                    <TextField label="Your Email" type="email" fullWidth margin="normal" variant="outlined" />
+                    <TextField
+                      label="Your Message"
+                      multiline
+                      rows={4}
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <Button
+                      variant="contained"
+                      size="large"
+                      sx={{
+                        mt: 2,
+                        backgroundColor: "#ff6f61",
+                        borderRadius: "25px",
+                        "&:hover": { backgroundColor: "#ff3b2e" },
+                      }}
+                    >
+                      Send Message
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </Grid>
+
+          {/* Contact Info */}
+          <Grid item xs={12} md={6}>
+            <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }}>
+              <Grid container spacing={3}>
+                {[
+                  { icon: <Email fontSize="large" color="primary" />, title: "Email Us", detail: "support@shopsite.com" },
+                  { icon: <Phone fontSize="large" color="success" />, title: "Call Us", detail: "+92 300 1234567" },
+                  { icon: <LocationOn fontSize="large" color="error" />, title: "Visit Us", detail: "123 Airway Boulevard, Peshawar" },
+                ].map((item, index) => (
+                  <Grid item xs={12} key={index}>
+                    <Card elevation={3} sx={{ display: "flex", alignItems: "center", p: 2, borderRadius: "20px" }}>
+                      <Box sx={{ mr: 2 }}>{item.icon}</Box>
+                      <Box>
+                        <Typography variant="h6">{item.title}</Typography>
+                        <Typography color="text.secondary">{item.detail}</Typography>
+                      </Box>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </motion.div>
+          </Grid>
+        </Grid>
+
+        {/* Map Section */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <Box mt={8}>
+            <Typography variant="h5" align="center" gutterBottom>
+              Find Us on the Map
+            </Typography>
+            <Box
+              sx={{
+                mt: 2,
+                height: 300,
+                borderRadius: "20px",
+                overflow: "hidden",
+                boxShadow: 3,
+              }}
+            >
+              <iframe
+                title="Google Map"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.612505923763!2d71.524915!3d34.015136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38deca3f9d9cxxxx%3A0xXXXXXXXXXXXXXXX!2sPeshawar!5e0!3m2!1sen!2sPK!4v1700000000000"
+              ></iframe>
+            </Box>
+          </Box>
+        </motion.div>
+      </Container>
+    </Box>
+  );
+};
+
+export default Contact;
