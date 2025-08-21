@@ -5,6 +5,7 @@ import Contact from "./components/Contact"
 import { Routes, Route } from 'react-router-dom'
 import Products from "./components/Products"
 import Cart from "./components/Cart"
+import Footer from "./components/Footer"
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         {/* <Route path="/policies" element={<Policies />} /> */}
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
     </>
   )
 }

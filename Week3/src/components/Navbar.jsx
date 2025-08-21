@@ -123,7 +123,7 @@ const drawer = (
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav" sx={{ bgcolor: '#112335ff' }}>
+      <AppBar component="nav" sx={{ bgcolor: '#1a1a40' }}>
         <Toolbar>
           {/* Mobile Menu Icon */}
           <IconButton
@@ -195,7 +195,7 @@ const drawer = (
                   key={item.name}
                   to={item.path}
                   style={({ isActive }) => ({
-                    color: isActive ? '#c29999ff' : '#fff',
+                    color: isActive ? '#28eaed' : '#fff',
                     marginLeft: 20,
                     textDecoration: 'none',
                     fontSize: 18,
