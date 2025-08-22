@@ -2,15 +2,17 @@ import Navbar from "./components/Navbar"
 import Home from "./components/Home"
 import About from "./components/About"
 import Contact from "./components/Contact"
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import Products from "./components/Products"
 import Cart from "./components/Cart"
 import Footer from "./components/Footer"
+import { CartProvider } from "./components/CartContext"
 
 function App() {
 
   return (
     <>
+    <CartProvider>
       <Navbar/> {/* Always visible */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,6 +23,7 @@ function App() {
         {/* <Route path="/policies" element={<Policies />} /> */}
       </Routes>
       <Footer/>
+      </CartProvider>
     </>
   )
 }
