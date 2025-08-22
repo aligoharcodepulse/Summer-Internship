@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 import ThankYouModal from "../Model/ThankYouModal";
 
 const Cart = () => {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
   const [open, setOpen] = useState(false);
   const [thankYouOpen, setThankYouOpen] = useState(false);
   const navigate = useNavigate();

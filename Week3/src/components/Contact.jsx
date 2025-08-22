@@ -114,7 +114,7 @@ const Contact = () => {
                 open={snackbarOpen}
                 autoHideDuration={4000}
                 onClose={() => setSnackbarOpen(false)}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
               >
                 <Alert severity="success" onClose={() => setSnackbarOpen(false)}>
                  Your message has been sent! ✅ 
