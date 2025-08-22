@@ -22,7 +22,7 @@ const Products = () => {
   const products = [
     { id: 1, name: "Wireless Headphones", price: 120, image: "/images/wirelesshp.png", tag: "Hot" },
     { id: 2, name: "Smart Watch", price: 250, image: "/images/smwatch.png", tag: "New" },
-    { id: 3, name: "DSLR Camera", price: 899, image: "/images/dslr.png", tag: "Sale" },
+    { id: 3, name: "DSLR Camera", price: 809, image: "/images/dslr.png", tag: "Sale 10% Off" },
     { id: 4, name: "Bluetooth Speaker", price: 180, image: "/images/blSpeaker.png", tag: "Best Seller" },
     { id: 5, name: "Gaming Laptop", price: 1499, image: "/images/gmLaptop.png", tag: "Trending" },
     { id: 6, name: "Wireless Mouse", price: 45, image: "/images/wrMouse.png" },
@@ -32,9 +32,9 @@ const Products = () => {
     { id: 10, name: "Drone", price: 999, image: "/images/drone.png", tag: "New" },
     { id: 11, name: "VR Headset", price: 499, image: "/images/vr.png" },
     { id: 12, name: "Portable Charger", price: 60, image: "/images/charger.png" },
-    { id: 13, name: "Fitness Tracker", price: 90, image: "/images/tracker.png", tag:"Sale" },
+    { id: 13, name: "Fitness Tracker", price: 45, image: "/images/tracker.png", tag:"Sale 50% Off" },
     { id: 14, name: "Smart Glasses", price: 350, image: "/images/glasses.png" },
-    { id: 15, name: "Action Camera", price: 299, image: "/images/actioncamera.png", tag: "Sale" },
+    { id: 15, name: "Action Camera", price: 239, image: "/images/actioncamera.png", tag: "Sale 20% Off" },
   ];
 
   const handleAddToCart = (product) => {

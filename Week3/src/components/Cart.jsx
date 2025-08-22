@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -11,17 +11,65 @@ import {
   TextField,
   Divider,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  MenuItem,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "./CartContext";
+import { useNavigate } from "react-router-dom";   // ✅ added for redirection
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
+  const [open, setOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const navigate = useNavigate();  // ✅ for redirect
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    payment: "",
+  });
+
+  const [errors, setErrors] = useState({});
 
   const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  const validateForm = () => {
+    let tempErrors = {};
+    if (!formData.name) tempErrors.name = "Full Name is required";
+    if (!formData.email) tempErrors.email = "Email is required";
+    if (!formData.phone) tempErrors.phone = "Phone Number is required";
+    if (!formData.address) tempErrors.address = "Address is required";
+    if (!formData.payment) tempErrors.payment = "Payment Method is required";
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
+  const handlePlaceOrder = () => {
+    if (validateForm()) {
+      setOpen(false);
+      setSnackbarOpen(true);
+
+      // Empty cart after order
+      localStorage.removeItem("cart");
+
+      // ✅ Redirect after short delay (so snackbar is visible)
+      setTimeout(() => {
+        navigate("/thankyou");
+      }, 2000);  // Snackbar stays for ~2s
+    }
+  };
+
   return (
-    <Box sx={{ py: 8,mt:4, px: { xs: 2, md: 6 }, minHeight: "100vh", backgroundColor: "#fff" }}>
+    <Box sx={{ py: 8, mt: 4, px: { xs: 2, md: 6 }, minHeight: "100vh", backgroundColor: "#fff" }}>
       <Typography variant="h3" align="center" gutterBottom sx={{ fontWeight: "bold", mb: 4 }}>
         Your Cart
       </Typography>
@@ -66,13 +114,101 @@ const Cart = () => {
               variant="contained"
               size="large"
               disabled={cart.length === 0}
-              sx={{ backgroundColor: "#ff6f61", borderRadius: "25px", px: 4, fontWeight: "bold", "&:hover": { backgroundColor: "#ff3b2e" } }}
+              onClick={() => setOpen(true)}
+              sx={{
+                backgroundColor: "#ff6f61",
+                borderRadius: "25px",
+                px: 4,
+                fontWeight: "bold",
+                "&:hover": { backgroundColor: "#ff3b2e" },
+              }}
             >
               Checkout
             </Button>
           </Box>
         </>
       )}
+
+      {/* Checkout Modal */}
+      <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="sm">
+        <DialogTitle>Checkout</DialogTitle>
+        <DialogContent dividers>
+          <TextField
+            label="Full Name"
+            fullWidth
+            margin="normal"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            error={!!errors.name}
+            helperText={errors.name}
+          />
+          <TextField
+            label="Email"
+            fullWidth
+            margin="normal"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            error={!!errors.email}
+            helperText={errors.email}
+          />
+          <TextField
+            label="Phone Number"
+            fullWidth
+            margin="normal"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            error={!!errors.phone}
+            helperText={errors.phone}
+          />
+          <TextField
+            label="Address"
+            fullWidth
+            margin="normal"
+            value={formData.address}
+            onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+            error={!!errors.address}
+            helperText={errors.address}
+          />
+          <TextField
+            select
+            label="Payment Method"
+            fullWidth
+            margin="normal"
+            value={formData.payment}
+            onChange={(e) => setFormData({ ...formData, payment: e.target.value })}
+            error={!!errors.payment}
+            helperText={errors.payment}
+          >
+            <MenuItem value="card">Credit/Debit Card</MenuItem>
+            <MenuItem value="cod">Cash on Delivery</MenuItem>
+          </TextField>
+          <Typography variant="h6" sx={{ mt: 2, fontWeight: "bold" }}>
+            Total: ${totalAmount.toFixed(2)}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#ff6f61", "&:hover": { backgroundColor: "#ff3b2e" } }}
+            onClick={handlePlaceOrder}
+          >
+            Place Order
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Snackbar */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}   // ✅ stays visible for 2s
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: "100%" }}>
+          ✅ Order confirmed! Thank you for shopping with us.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
