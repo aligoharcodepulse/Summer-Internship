@@ -1,8 +1,37 @@
-import { Container, Grid, TextField, Button, Card, CardContent, Typography, Box } from "@mui/material";
+import { Container, Grid, TextField, Button, Card, CardContent, Typography, Box, Snackbar, Alert } from "@mui/material";
 import { motion } from "framer-motion";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
+import { useState } from "react";
 
 const Contact = () => {
+
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({});
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    let tempErrors = {};
+    if (!formData.name) tempErrors.name = "Name is required";
+    if (!formData.email) tempErrors.email = "Email is required";
+    if (!formData.message) tempErrors.message = "Message is required";
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      setSnackbarOpen(true);
+      setFormData({ name: "", email: "", message: "" }); // reset form
+      setErrors({});
+    }
+  };
+
+
   return (
     <Box sx={{ py: 8, backgroundColor: "#f9f9f9",mt:5 }}>
       <Container>
@@ -18,41 +47,80 @@ const Contact = () => {
 
         <Grid container spacing={6} mt={4} justifyContent={'center'}>
           {/* Contact Form */}
-          <Grid item xs={12} md={6}>
-            <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}>
-              <Card elevation={4} sx={{ borderRadius: "8px",p:1 }}>
-                <CardContent>
-                  <Typography variant="h5" gutterBottom>
-                    Send Us a Message
-                  </Typography>
-                  <form>
-                    <TextField label="Your Name" fullWidth margin="normal" variant="outlined" />
-                    <TextField label="Your Email" type="email" fullWidth margin="normal" variant="outlined" />
-                    <TextField
-                      label="Your Message"
-                      multiline
-                      rows={4}
-                      fullWidth
-                      margin="normal"
-                      variant="outlined"
-                    />
-                    <Button
-                      variant="contained"
-                      size="large"
-                      sx={{
-                        mt: 2,
-                        backgroundColor: "#ff6f61",
-                        borderRadius: "25px",
-                        "&:hover": { backgroundColor: "#ff3b2e" },
-                      }}
-                    >
-                      Send Message
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </Grid>
+        <Grid item xs={12} md={6}>
+              <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }}>
+                <Card elevation={4} sx={{ borderRadius: "8px", p: 1 }}>
+                  <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                      Send Us a Message
+                    </Typography>
+                    <form onSubmit={handleSubmit}>
+                      <TextField
+                        label="Your Name"
+                        name="name"
+                        fullWidth
+                        margin="normal"
+                        variant="outlined"
+                        value={formData.name}
+                        onChange={handleChange}
+                        error={!!errors.name}
+                        helperText={errors.name}
+                      />
+                      <TextField
+                        label="Your Email"
+                        name="email"
+                        type="email"
+                        fullWidth
+                        margin="normal"
+                        variant="outlined"
+                        value={formData.email}
+                        onChange={handleChange}
+                        error={!!errors.email}
+                        helperText={errors.email}
+                      />
+                      <TextField
+                        label="Your Message"
+                        name="message"
+                        multiline
+                        rows={4}
+                        fullWidth
+                        margin="normal"
+                        variant="outlined"
+                        value={formData.message}
+                        onChange={handleChange}
+                        error={!!errors.message}
+                        helperText={errors.message}
+                      />
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        size="large"
+                        sx={{
+                          mt: 2,
+                          backgroundColor: "#ff6f61",
+                          borderRadius: "25px",
+                          "&:hover": { backgroundColor: "#ff3b2e" },
+                        }}
+                      >
+                        Send Message
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Snackbar for success */}
+              <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={4000}
+                onClose={() => setSnackbarOpen(false)}
+                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              >
+                <Alert severity="success" onClose={() => setSnackbarOpen(false)}>
+                 Your message has been sent! ✅ 
+                </Alert>
+              </Snackbar>
+            </Grid>
 
           {/* Contact Info */}
           <Grid item xs={12} md={6}>
