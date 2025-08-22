@@ -195,7 +195,7 @@ const drawer = (
                   key={item.name}
                   to={item.path}
                   style={({ isActive }) => ({
-                    color: isActive ? '#28eaed' : '#fff',
+                    color: isActive ? '#f7665cff' : '#fff',
                     marginLeft: 20,
                     textDecoration: 'none',
                     fontSize: 18,

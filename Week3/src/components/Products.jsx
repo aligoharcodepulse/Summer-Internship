@@ -26,10 +26,10 @@ const Products = () => {
     { id: 9, name: "Tablet Pro", price: "$799", image: "/images/tablet.png" },
     { id: 10, name: "Drone", price: "$999", image: "/images/drone.png", tag: "New" },
     { id: 11, name: "VR Headset", price: "$499", image: "/images/vr.png" },
-    { id: 12, name: "Portable Charger", price: "$60", image: "/images/powerbank.png" },
-    { id: 13, name: "Fitness Tracker", price: "$90", image: "/images/tracker.png" },
+    { id: 12, name: "Portable Charger", price: "$60", image: "/images/charger.png" },
+    { id: 13, name: "Fitness Tracker", price: "$90 After 50% Off ---- $45", image: "/images/tracker.png", tag:"Sale" },
     { id: 14, name: "Smart Glasses", price: "$350", image: "/images/glasses.png" },
-    { id: 15, name: "Action Camera", price: "$299 After 10% Off ---- $269", image: "/images/actioncam.png", tag: "Sale" },
+    { id: 15, name: "Action Camera", price: "$299 After 10% Off ---- $269", image: "/images/actioncamera.png", tag: "Sale" },
   ];
 
   return (
@@ -109,7 +109,7 @@ const Products = () => {
                   }}
                   onClick={() => navigate("/shop/products")}
                 >
-                  Shop Now
+                  Add to Cart
                 </Button>
               </CardActions>
             </Card>
