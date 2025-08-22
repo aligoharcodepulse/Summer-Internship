@@ -16,19 +16,17 @@ import {
   DialogContent,
   DialogActions,
   MenuItem,
-  Snackbar,
-  Alert,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "./CartContext";
-import { useNavigate } from "react-router-dom";   // ✅ added for redirection
+import { useNavigate } from "react-router-dom";
+import ThankYouModal from "../Model/ThankYouModal";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
   const [open, setOpen] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const navigate = useNavigate();  // ✅ for redirect
-
+  const [thankYouOpen, setThankYouOpen] = useState(false);
+  const navigate = useNavigate();
   // Form state
   const [formData, setFormData] = useState({
     name: "",
@@ -55,16 +53,10 @@ const Cart = () => {
 
   const handlePlaceOrder = () => {
     if (validateForm()) {
+        clearCart();
       setOpen(false);
-      setSnackbarOpen(true);
-
-      // Empty cart after order
-      localStorage.removeItem("cart");
-
-      // ✅ Redirect after short delay (so snackbar is visible)
-      setTimeout(() => {
-        navigate("/thankyou");
-      }, 2000);  // Snackbar stays for ~2s
+      setThankYouOpen(true);
+      
     }
   };
 
@@ -197,18 +189,13 @@ const Cart = () => {
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* Snackbar */}
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={2000}   // ✅ stays visible for 2s
-        onClose={() => setSnackbarOpen(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        <Alert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: "100%" }}>
-          ✅ Order confirmed! Thank you for shopping with us.
-        </Alert>
-      </Snackbar>
+      <ThankYouModal
+      open={thankYouOpen}
+      onClose={() => {
+        setThankYouOpen(false);
+        navigate("/");
+      }}
+    />
     </Box>
   );
 };

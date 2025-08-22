@@ -7,7 +7,6 @@ import Products from "./components/Products"
 import Cart from "./components/Cart"
 import Footer from "./components/Footer"
 import { CartProvider } from "./components/CartContext"
-import ThankYou from "./components/Thankyou"
 
 function App() {
 
@@ -21,8 +20,6 @@ function App() {
         <Route path="/shop/products" element={<Products />} />
         <Route path="/shop/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/thankyou" element={<ThankYou />} />
-        {/* <Route path="/policies" element={<Policies />} /> */}
       </Routes>
       <Footer/>
       </CartProvider>
