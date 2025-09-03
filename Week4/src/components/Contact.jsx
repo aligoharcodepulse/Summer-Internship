@@ -5,18 +5,19 @@ import {
   Button,
   Typography,
   Container,
-  Grid,
   Paper,
-  IconButton,
+  Snackbar,
+  Alert
 } from "@mui/material";
-import { Facebook, Twitter, Instagram, LinkedIn } from "@mui/icons-material";
+
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +25,7 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Message Sent ✅");
+    setSnackbarOpen(true);
     setFormData({ name: "", email: "", message: "" });
   };
 
@@ -99,6 +100,17 @@ export default function Contact() {
           </form>
         </Paper>
       </Container>
+
+              <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={4000}
+                onClose={() => setSnackbarOpen(false)}
+                anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+              >
+                <Alert severity="success" onClose={() => setSnackbarOpen(false)}>
+                 Your message has been sent! ✅ 
+                </Alert>
+              </Snackbar>
     </>
   );
 }
