@@ -79,7 +79,7 @@ const eventsData = [
     shortDesc: "Discover innovations by young scientists.",
     fullDesc:
       "A platform for students and researchers to showcase scientific projects, prototypes, and innovations.",
-    image: "/images/image.png",
+    image: "/images/science.png",
     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3531.566349977199!2d74.34087637488557!3d31.525323148127777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391904bd095a828b%3A0x8fbd05e8fce7558b!2sExpo%20Center%20Lahore!5e0!3m2!1sen!2s!4v1693918530035",
   },
 ];
